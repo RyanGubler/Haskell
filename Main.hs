@@ -24,6 +24,9 @@ main = do
   let add2 x = 2 + x
   mapM testIt [
     ("take 3 countingNumbers", take 3 countingNumbers),
+    ("take 5 countingNumbers", take 5 countingNumbers),
+    ("take 1 (multiplesOfNumbers 5)", take 1 (multiplesOfNumbers 5)),
+    ("take 5 (multiplesOfNumbers 2)", take 5 (multiplesOfNumbers 2)),
     ("take 10 padovanNumbers", take 10 padovanNumbers),
     ("take 10 woodallNumbers", take 10 woodallNumbers),
     ("order (<) (take 5 countingNumbers) (take 5 padovanNumbers)", 
@@ -45,7 +48,7 @@ main = do
     ]
   mapM testIt [
     ("listPairApply [(+),(-)] []", 
-     listPairApply [(+),(-)] []),
+     -- listPairApply [(+),(-)] []),
     ("listPairApply [(+),(-)] (pairUp (take 5 countingNumbers))", 
      listPairApply [(+),(-)] (pairUp (take 5 countingNumbers)))
     ]
