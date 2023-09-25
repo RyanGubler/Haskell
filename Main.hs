@@ -1,4 +1,4 @@
-import Lists 
+import Lists
 
 {-- Some predefined functions for composing --}
 add1 x = 1 + x
@@ -9,8 +9,8 @@ add3 x = 3 + x
    evaluates the test.
 -}
 testIt :: (Show t) => (String, t) -> IO ()
-testIt (s,f) = do 
-  putStr "\n" 
+testIt (s,f) = do
+  putStr "\n"
   putStr s
   putStr "\n"
   print (f)
@@ -19,39 +19,49 @@ testIt (s,f) = do
    of (String, t), where t is the test. Add tests as you like or
    remove tests if you like.
 -}
-main = do 
+main = do
   let add1 x = 1 + x
   let add2 x = 2 + x
-  mapM testIt [
-    ("take 3 countingNumbers", take 3 countingNumbers),
-    ("take 5 countingNumbers", take 5 countingNumbers),
-    ("take 1 (multiplesOfNumbers 5)", take 1 (multiplesOfNumbers 5)),
-    ("take 5 (multiplesOfNumbers 2)", take 5 (multiplesOfNumbers 2)),
-    ("take 10 padovanNumbers", take 10 padovanNumbers),
-    ("take 10 woodallNumbers", take 10 woodallNumbers),
-    ("order (<) (take 5 countingNumbers) (take 5 padovanNumbers)", 
+  mapM_ testIt[
+     ("take 3 countingNumbers", take 3 countingNumbers),
+     ("take 5 countingNumbers", take 5 countingNumbers),
+     ("take 1 (multiplesOfNumbers 5)", take 1 (multiplesOfNumbers 5)),
+     ("take 5 (multiplesOfNumbers 2)", take 5 (multiplesOfNumbers 2)),
+     ("take 10 padovanNumbers", take 10 padovanNumbers),
+     ("take 10 woodallNumbers", take 10 (woodallNumbers 10)),
+     ("order (<) (take 5 countingNumbers) (take 5 padovanNumbers)",
       order (<) (take 5 countingNumbers) (take 5 padovanNumbers)),
-    ("order (>) (take 5 countingNumbers) (take 5 padovanNumbers)", 
+     ("order (>) (take 5 countingNumbers) (take 5 padovanNumbers)",
       order (>) (take 5 countingNumbers) (take 5 padovanNumbers)),
-    ("order (>) [] (take 5 padovanNumbers)", 
-      order (>) [](take 5 padovanNumbers))
+     ("order (>) [] (take 5 padovanNumbers)",
+      order (>) [] (take 5 padovanNumbers)),
+     ("order (<) (take 5 woodallNumbers) (take 5 (multiplesOfNumbers 2))",
+      order
+      (<) (take 5 (woodallNumbers 5)) (take 5 (multiplesOfNumbers 2)))
     ]
-  mapM testIt [
-    ("runLengthEncoding (take 5 countingNumbers)", 
-     runLengthEncoding (take 5 countingNumbers)),
-    ("runLengthEncoding (take 5 padovanNumbers)", 
-     runLengthEncoding (take 5 padovanNumbers))
+  -- mapM_ testIt [
+  --   ("runLengthEncoding (take 5 countingNumbers)", 
+  --    runLengthEncoding (take 5 countingNumbers)),
+  --   ("runLengthEncoding (take 10 padovanNumbers)", 
+  --    runLengthEncoding (take 10 padovanNumbers))
+  --   ]
+  mapM_ testIt [
+    ("pairUp []", pairUp []),
+    ("pairUp (take 3 countingNumbers)",
+      pairUp (take 3 countingNumbers)),
+    ("pairUp (take 5 countingNumbers)",
+      pairUp (take 5 countingNumbers))
     ]
-  mapM testIt [
-    ("pairUp (take 5 countingNumbers)", []),
-    ("pairUp (take 5 countingNumbers)", pairUp (take 5 countingNumbers))
-    ]
-  mapM testIt [
-    ("listPairApply [(+),(-)] []", 
-     -- listPairApply [(+),(-)] []),
-    ("listPairApply [(+),(-)] (pairUp (take 5 countingNumbers))", 
-     listPairApply [(+),(-)] (pairUp (take 5 countingNumbers)))
-    ]
-  mapM testIt [
-    ("(composeList [add1,add2,add1]) 3", ((composeList [add1,add2,add1]) 3))
+  -- mapM testIt [
+  --   ("listPairApply [(+),(-)] []", 
+  --    show (listPairApply [(+),(-)] [])),
+  --   ("listPairApply [(+),(-)] (pairUp (take 6 countingNumbers))", 
+  --    show (listPairApply [(+),(-)] (pairUp (take 6 countingNumbers)))),
+  --   ("listPairApply [(+),(*)] (pairUp (take 8 countingNumbers))",
+  --    show (listPairApply [(+),(*)] (pairUp (take 8 countingNumbers))))
+  --   ]
+  mapM_ testIt [
+    ("(composeList [add1,add2,add1]) 3", composeList [add1,add2,add1] 3),
+    ("(composeList [add1, add2, add3] 3)", composeList [add1,add2,add3] 3),
+    ("(composeList [] 3)", composeList [] 3)
     ]
