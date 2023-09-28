@@ -9,11 +9,11 @@ testIt (s,f) = do
   putStr "\n"
   putStr s
   putStr "\n"
-  print (f)
+  print f
 main = do
   let add1 x = 1 + x
   let add2 x = 2 + x
-  mapM_ testIt[
+  mapM_ testIt [
      ("take 3 countingNumbers", take 3 countingNumbers),
      ("take 5 countingNumbers", take 5 countingNumbers),
      ("take 1 (multiplesOfNumbers 5)", take 1 (multiplesOfNumbers 5)),
@@ -31,11 +31,11 @@ main = do
   mapM_ testIt [
     ("runLengthEncoding []", runLengthEncoding []),
     ("runLengthEncoding [7]", runLengthEncoding [7]),
-    ("runLengthEncoding [7, 7, 4, 7, 7, 7]", 
+    ("runLengthEncoding [7, 7, 4, 7, 7, 7]",
       runLengthEncoding [7, 7, 4, 7, 7, 7]),
-    ("runLengthEncoding (take 5 countingNumbers)", 
+    ("runLengthEncoding (take 5 countingNumbers)",
      runLengthEncoding (take 5 countingNumbers)),
-    ("runLengthEncoding (take 10 padovanNumbers)", 
+    ("runLengthEncoding (take 10 padovanNumbers)",
      runLengthEncoding (take 10 padovanNumbers))
     ]
   mapM_ testIt [
@@ -46,9 +46,9 @@ main = do
       pairUp (take 5 countingNumbers))
     ]
   mapM_ testIt [
-    ("listPairApply [(+),(-)] []", 
+    ("listPairApply [(+),(-)] []",
      show (listPairApply [(+),(-)] [])),
-    ("listPairApply [(+),(-)] (pairUp (take 6 countingNumbers))", 
+    ("listPairApply [(+),(-)] (pairUp (take 6 countingNumbers))",
      show (listPairApply [(+),(-)] (pairUp (take 6 countingNumbers)))),
     ("listPairApply [(+),(*)] (pairUp (take 8 countingNumbers))",
      show (listPairApply [(+),(*)] (pairUp (take 8 countingNumbers)))),
